@@ -5,7 +5,7 @@ This project is an implementation of basic operations of the AWS S3 API. It impl
 - `create_bucket`
 - `get_object`
 - `put_object`
-- `put_object`
+- `delete_object`
 
 Because it mirrors the AWS API it is compatible with SDKs such as `boto3`. This makes it suitable for local development, test mocking, or
 lightweight self-hosted object storage.
