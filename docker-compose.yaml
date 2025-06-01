@@ -1,0 +1,33 @@
+# the only purpose of this docker-compose is to run integration tests in containers
+
+services:
+  bucket:
+    build:
+      context: ./
+    ports:
+      - 8000:8000
+    environment:
+      ACCESS_KEY: ${ACCESS_KEY}
+      SECRET_KEY: ${SECRET_KEY}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "wget --spider --tries=1 --no-verbose http://localhost:8000/ || exit 1",
+        ]
+      interval: 3s
+      timeout: 10s
+      retries: 5
+
+  tests:
+    build:
+      context: ./tests
+    environment:
+      HOST: bucket:8000
+      ACCESS_KEY: ${ACCESS_KEY}
+      SECRET_KEY: ${SECRET_KEY}
+    depends_on:
+      bucket:
+        condition: "service_healthy"
