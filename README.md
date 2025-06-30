@@ -46,9 +46,3 @@ s3.put_object(Bucket=bucket_name, Key=object_key, Body=body)
 response = s3.get_object(Bucket=bucket_name, Key=object_key)
 print(body == response["Body"].read()) # True
 ```
-
-## Motivation :bulb:
-
-While solutions like `MinIO` offer similar S3-compatible storage APIs, they require a paid subscription for production use
-(as of: June 1. 2025). This limitation was one of the main driving factors behind this project. The goal is also to provide a more
-lightweight solution that supports only essential S3 operations.
